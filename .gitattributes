@@ -1,3 +1,2 @@
 * text eol=lf
 *.csv text
-en_US_twitter.txt filter=lfs diff=lfs merge=lfs -text
