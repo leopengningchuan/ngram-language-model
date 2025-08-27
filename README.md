@@ -28,9 +28,12 @@ Configuration & Metadata:
 - `LICENSE.txt` – license information
 - `.gitignore` – git ignore config
 - `.gitattributes` – git attributes config
+- `images/` – folder containing project-related screenshots and visual outputs
+  - `instructions-6_20250826.png` – visualization of Gradio interactive interface
 
 Core Logic:
 - `N-gram_modeling.ipynb` – notebook for ngram modeling
+- `simplified_data.csv` – smaller cleaned CSV file containing processed Twitter text data
 
 ## Instructions
 
@@ -64,6 +67,8 @@ By chaining these local next-word predictions, the module produces a fluent sent
 Instead of running predictions directly from code cells, users can input words and instantly see the results through a simple web-based interactive interface enabled by *Gradio*:
 - On the left panel, users enter two words to perform word prediction. The interface outputs a prediction table showing possible next words and their associated ratios, as well as the total prediction ratio.
 - On the right panel, users enter two words to perform sentence generation, where the model iteratively produces a sentence based on 3-gram probabilities.
+
+![Gradio Interactive Interface](images/instructions-6_20250826.png)
 
 ## Future Improvements
 - **Smoothing Techniques**: Implement methods such as Laplace or Kneser–Ney smoothing to handle unseen N-grams and reduce zero-probability issues.
