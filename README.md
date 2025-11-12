@@ -12,6 +12,7 @@ Predict the next word in a sequence using N-gram statistics from a text corpus a
   - [4. Phrase Prediction](#4-phrase-prediction)
   - [5. Sentence Generation](#5-sentence-generation)
   - [6. Gradio Interactive Interface](#6-gradio-interactive-interface)
+  - [7. Sentiment Analysis](#7-sentiment-analysis)
 - [Future Improvements](#future-improvements)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
@@ -29,10 +30,13 @@ Configuration & Metadata:
 - `.gitignore` – git ignore config
 - `.gitattributes` – git attributes config
 - `images/` – folder containing project-related screenshots and visual outputs
-  - `instructions-6_20250826.png` – visualization of Gradio interactive interface
+  - `instructions-6_20250826.png` – visualization of *Gradio Interactive Interface*
+  - `instructions-7-1_20251111.png` – visualization of *Positive and Negative Sentiment Mean & Std by Subjectivity Level*
+  - `instructions-7-2_20251111.png` – visualization of *Distribution of Positive vs Negative Sentiment (with Mean ± Std)*
 
 Core Logic:
 - `N-gram_modeling.ipynb` – notebook for ngram modeling
+- `sentiment_analysis.ipynb` – notebook for sentiment analysis
 - `simplified_data.csv` – smaller cleaned CSV file containing processed Twitter text data
 
 ## Instructions
@@ -40,6 +44,9 @@ Core Logic:
 ### 1. Packages Used
 - `pandas`, `np`, `re`, `random`, `collections`: for data manipulation
 - `gradio`: for building web-based interactive interface
+- `seaborn`, `matplotlib`: for graphing and visualization
+- `vaderSentiment`, `textblob`, `afinn`: for sentiment analysis score
+- `warnings`: core Python libraries for basic system operations
 
 ### 2. Datasets Used
 This project utilizes the U.S. Twitter dataset provided as part of the [*John Hopkins University: Data Science Specialization*](https://www.coursera.org/specializations/jhu-data-science) on Coursera. The dataset contains over 2.36 million lines of text, offering a large-scale corpus for language modeling and text analysis tasks.
@@ -68,7 +75,27 @@ Instead of running predictions directly from code cells, users can input words a
 - On the left panel, users enter two words to perform word prediction. The interface outputs a prediction table showing possible next words and their associated ratios, as well as the total prediction ratio.
 - On the right panel, users enter two words to perform sentence generation, where the model iteratively produces a sentence based on 3-gram probabilities.
 
-![Gradio Interactive Interface](images/instructions-6_20250826.png)
+![*Gradio Interactive Interface*](images/instructions-6_20250826.png)
+
+### 7. Sentiment Analysis
+This module evaluates tweet sentiments using *VADER*, *AFINN*, and *TextBlob*, capturing multiple perspectives of emotional tone.
+
+A separate Jupyter Notebook `sentiment_analysis.ipynb` reads the Twitter dataset line by line into a DataFrame, where each row represents a tweet. Sentiment scores are extracted for every entry:
+- `sia_pos` — from `vaderSentiment`, positive sentiment score (0–1), indicating the degree of positive emotion.
+- `sia_neg` — from `vaderSentiment`, negative sentiment score (0–1), indicating the degree of negative emotion.
+- `sia_neu` — from `vaderSentiment`, neutral sentiment score (0–1), indicating how much of the text is emotionally neutral.
+- `sia_comp` — from `vaderSentiment`, compound sentiment score, normalized between –1 (most negative) and +1 (most positive).
+- `tb_polarity` — from `TextBlob`, overall polarity score, indicating the overall positivity or negativity of the text.
+- `tb_subjectivity` — from `TextBlob`, overall subjectivity score, indicating how opinion-based or subjective the text is.
+- `afinn` — from `Afinn`, sentiment score, calculated by summing predefined positive and negative word-level sentiment values.
+
+Key Findings:
+1. Correlations among the three sentiment models increase with higher subjectivity, indicating that model outputs are more consistent and reliable when tweets are emotionally expressive.
+2. Across all subjectivity levels, positive sentiment consistently outweighs negative sentiment, suggesting that tweets generally convey optimism.
+   ![*Positive and Negative Sentiment Mean & Std by Subjectivity Level*](instructions-7-1_20251111.png)
+4. As subjectivity rises, negative sentiment scores shift upward, implying that highly subjective texts express stronger negative emotions.
+5. Positive scores are higher on average and more widely distributed, while negative scores are mostly concentrated near zero with a thin tail.
+   ![*Distribution of Positive vs Negative Sentiment (with Mean ± Std)*](instructions-7-2_20251111.png)
 
 ## Future Improvements
 - **Smoothing Techniques**: Implement methods such as Laplace or Kneser–Ney smoothing to handle unseen N-grams and reduce zero-probability issues.
@@ -78,6 +105,10 @@ Instead of running predictions directly from code cells, users can input words a
 ## Acknowledgements
 - This project was inspired by the [*John Hopkins University: Data Science Specialization*](https://www.coursera.org/specializations/jhu-data-science) Capstone on [*Coursera*](https://www.coursera.org/).
 - Thanks to [`gradio`](https://pypi.org/project/gradio/) for enabling the interactive app interface.
+- Thanks the following libraries for enabling sentiment analysis possible, including:
+  - [`vaderSentiment`](https://pypi.org/project/vaderSentiment/)
+  - [`afinn`](https://pypi.org/project/afinn/)
+  - [`textblob`](https://pypi.org/project/textblob/)
 
 ## License
 This project is licensed under the MIT License - see the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/leopengningchuan/ngram-language-model?tab=MIT-1-ov-file) file for details.
