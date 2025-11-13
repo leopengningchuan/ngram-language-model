@@ -92,10 +92,10 @@ A separate Jupyter Notebook `sentiment_analysis.ipynb` reads the Twitter dataset
 Key Findings:
 1. Correlations among the three sentiment models increase with higher subjectivity, indicating that model outputs are more consistent and reliable when tweets are emotionally expressive.
 2. Across all subjectivity levels, positive sentiment consistently outweighs negative sentiment, suggesting that tweets generally convey optimism.
-   ![*Positive and Negative Sentiment Mean & Std by Subjectivity Level*](instructions-7-1_20251111.png)
+   ![*Positive and Negative Sentiment Mean & Std by Subjectivity Level*](images/instructions-7-1_20251111.png)
 4. As subjectivity rises, negative sentiment scores shift upward, implying that highly subjective texts express stronger negative emotions.
 5. Positive scores are higher on average and more widely distributed, while negative scores are mostly concentrated near zero with a thin tail.
-   ![*Distribution of Positive vs Negative Sentiment (with Mean ± Std)*](instructions-7-2_20251111.png)
+   ![*Distribution of Positive vs Negative Sentiment (with Mean ± Std)*](images/instructions-7-2_20251111.png)
 
 ## Future Improvements
 - **Smoothing Techniques**: Implement methods such as Laplace or Kneser–Ney smoothing to handle unseen N-grams and reduce zero-probability issues.
